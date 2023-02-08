@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"const postRequest = {\r",
-							"    url: 'http://localhost:80/tokens',\r",
+							"    url: 'localhost:80/tokens',\r",
 							"    method: 'POST',\r",
 							"}; \r",
 							"\r",
@@ -50,7 +50,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:80/tokens",
+					"raw": "localhost:80/tokens",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -71,7 +71,7 @@
 					"script": {
 						"exec": [
 							"const postRequest = {\r",
-							"    url: 'http://localhost:80/tokens',\r",
+							"    url: 'localhost:80/tokens',\r",
 							"    method: 'POST',\r",
 							"}; \r",
 							"\r",
@@ -108,7 +108,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:80/tokens",
+					"raw": "localhost:80/tokens",
 					"protocol": "http",
 					"host": [
 						"localhost"

@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"const postRequest = {\r",
-							"    url: 'http://127.0.0.1:80/tokens',\r",
+							"    url: 'http://127.0.0.1:8080/tokens',\r",
 							"    method: 'POST',\r",
 							"}; \r",
 							"\r",
@@ -50,12 +50,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:80/tokens",
+					"raw": "http://127.0.0.1:8080/tokens",
 					"protocol": "http",
 					"host": [
 						"127.0.0.1"
 					],
-					"port": "80",
+					"port": "8080",
 					"path": [
 						"tokens"
 					]
@@ -71,7 +71,7 @@
 					"script": {
 						"exec": [
 							"const postRequest = {\r",
-							"    url: 'http://127.0.0.1:80/tokens',\r",
+							"    url: 'http://127.0.0.1:8080/tokens',\r",
 							"    method: 'POST',\r",
 							"}; \r",
 							"\r",
@@ -108,12 +108,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:80/tokens",
+					"raw": "http://127.0.0.1:8080/tokens",
 					"protocol": "http",
 					"host": [
 						"127.0.0.1"
 					],
-					"port": "80",
+					"port": "8080",
 					"path": [
 						"tokens"
 					]

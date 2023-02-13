@@ -41,10 +41,10 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:80/tokens",
+					"raw": "http://izicap:80/tokens",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"izicap"
 					],
 					"port": "80",
 					"path": [
@@ -90,10 +90,10 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:80/tokens",
+					"raw": "http://izicap:80/tokens",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"izicap"
 					],
 					"port": "80",
 					"path": [
@@ -140,10 +140,10 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:80/tokens",
+					"raw": "http://izicap:80/tokens",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"izicap"
 					],
 					"port": "80",
 					"path": [

@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "67b2963a-b074-416a-b1e5-ca3aa8a488fe",
+		"name": "IzicapCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AdminValid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const options = {\r",
+							"url: 'http://localhost:80/tokens',\r",
+							"method: 'POST',\r",
+							"header: {\"Content-Type\": \"application/json\"},\r",
+							"body: { \r",
+							"    mode: 'raw',\r",
+							"    raw:JSON.stringify({\r",
+							"        'username': 'admin',\r",
+							"        'password': 'admin'\r",
+							"        })\r",
+							"    }\r",
+							"}; \r",
+							"\r",
+							"pm.sendRequest(options, (error, response) => {\r",
+							"  pm.test('Response should be okay to process', () => {\r",
+							"    pm.expect(response).to.have.property('code', 201);\r",
+							"    pm.expect(response).to.have.property('status', 'Created');\r",
+							"  });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AdminEmpty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const options = {\r",
+							"url: 'http://localhost:80/tokens',\r",
+							"method: 'POST',\r",
+							"header: {\"Content-Type\": \"application/json\"},\r",
+							"body: { \r",
+							"    mode: 'raw',\r",
+							"    raw:JSON.stringify({\r",
+							"        'username': '',\r",
+							"        'password': ''\r",
+							"        })\r",
+							"    }\r",
+							"}; \r",
+							"\r",
+							"pm.sendRequest(options, (error, response) => {\r",
+							"  pm.test('Response should be okay to process', () => {\r",
+							"    pm.expect(response).to.have.property('code', 401);\r",
+							"    pm.expect(response).to.have.property('status', 'Unauthorized');\r",
+							"  });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserEmpty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const options = {\r",
+							"url: 'http://localhost:80/tokens',\r",
+							"method: 'POST',\r",
+							"header: {\"Content-Type\": \"application/json\"},\r",
+							"body: { \r",
+							"    mode: 'raw',\r",
+							"    raw:JSON.stringify({\r",
+							"        'username': '',\r",
+							"        'password': 'admin'\r",
+							"        })\r",
+							"    }\r",
+							"}; \r",
+							"\r",
+							"pm.sendRequest(options, (error, response) => {\r",
+							"  pm.test('response should be okay to process', () => {\r",
+							"    pm.expect(error).to.equal(null);\r",
+							"    pm.expect(response).to.have.property('code', 401);\r",
+							"    pm.expect(response).to.have.property('status', 'Unauthorized');\r",
+							"  });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

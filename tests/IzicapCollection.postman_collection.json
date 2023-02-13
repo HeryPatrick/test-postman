@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"const options = {\r",
-							"url: 'http://localhost:80/tokens',\r",
+							"url: 'http://izicap:80/tokens',\r",
 							"method: 'POST',\r",
 							"header: {\"Content-Type\": \"application/json\"},\r",
 							"body: { \r",
@@ -62,7 +62,7 @@
 					"script": {
 						"exec": [
 							"const options = {\r",
-							"url: 'http://localhost:80/tokens',\r",
+							"url: 'http://izicap:80/tokens',\r",
 							"method: 'POST',\r",
 							"header: {\"Content-Type\": \"application/json\"},\r",
 							"body: { \r",
@@ -111,7 +111,7 @@
 					"script": {
 						"exec": [
 							"const options = {\r",
-							"url: 'http://localhost:80/tokens',\r",
+							"url: 'http://izicap:80/tokens',\r",
 							"method: 'POST',\r",
 							"header: {\"Content-Type\": \"application/json\"},\r",
 							"body: { \r",

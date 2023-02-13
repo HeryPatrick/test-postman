@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"const options = {\r",
-							"url: 'http://izicap:80/tokens',\r",
+							"url: 'http://izicap:8080/tokens',\r",
 							"method: 'POST',\r",
 							"header: {\"Content-Type\": \"application/json\"},\r",
 							"body: { \r",
@@ -41,12 +41,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://izicap:80/tokens",
+					"raw": "http://izicap:8080/tokens",
 					"protocol": "http",
 					"host": [
 						"izicap"
 					],
-					"port": "80",
+					"port": "8080",
 					"path": [
 						"tokens"
 					]
@@ -62,7 +62,7 @@
 					"script": {
 						"exec": [
 							"const options = {\r",
-							"url: 'http://izicap:80/tokens',\r",
+							"url: 'http://izicap:8080/tokens',\r",
 							"method: 'POST',\r",
 							"header: {\"Content-Type\": \"application/json\"},\r",
 							"body: { \r",
@@ -90,12 +90,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://izicap:80/tokens",
+					"raw": "http://izicap:8080/tokens",
 					"protocol": "http",
 					"host": [
 						"izicap"
 					],
-					"port": "80",
+					"port": "8080",
 					"path": [
 						"tokens"
 					]
@@ -111,7 +111,7 @@
 					"script": {
 						"exec": [
 							"const options = {\r",
-							"url: 'http://izicap:80/tokens',\r",
+							"url: 'http://izicap:8080/tokens',\r",
 							"method: 'POST',\r",
 							"header: {\"Content-Type\": \"application/json\"},\r",
 							"body: { \r",
@@ -140,12 +140,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://izicap:80/tokens",
+					"raw": "http://izicap:8080/tokens",
 					"protocol": "http",
 					"host": [
 						"izicap"
 					],
-					"port": "80",
+					"port": "8080",
 					"path": [
 						"tokens"
 					]

@@ -1,0 +1,1710 @@
+{
+	"info": {
+		"_postman_id": "67b2963a-b074-416a-b1e5-ca3aa8a488fe",
+		"name": "IzicapCollection_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateToken_WithEmptyUserPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const options = {\r",
+							"\turl: 'http://localhost:80/tokens',\r",
+							"\tmethod: 'POST',\r",
+							"\theader: {\"Content-Type\": \"application/json\"},\r",
+							"\tbody: { \r",
+							"\t\tmode: 'raw',\r",
+							"\t\traw:JSON.stringify({  'username': '', 'password': '' })\r",
+							"\t}\r",
+							"}; \r",
+							"\r",
+							"pm.sendRequest(options, (error_1, response_1) => {\r",
+							"  pm.test('Test case : Create token with empty username/password : 401 Unauthorized', function() {\r",
+							"\t//pm.expect(response_1).to.have.property('code', 401);\r",
+							"    pm.expect(response_1).to.have.property('status', 'Unauthorized');\r",
+							"  });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateToken_WithEmptyUserValidPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const options = {\r",
+							"\turl: 'http://localhost:80/tokens',\r",
+							"\tmethod: 'POST',\r",
+							"\theader: {\"Content-Type\": \"application/json\"},\r",
+							"\tbody: { \r",
+							"\t\tmode: 'raw',\r",
+							"\t\traw:JSON.stringify({  'username': '', 'password': 'admin' })\r",
+							"\t}\r",
+							"}; \r",
+							"\r",
+							"pm.sendRequest(options, (error_2, response_2) => {\r",
+							"  pm.test('Test case : Create token with empty username/valid password : 401 Unauthorized', function() {\r",
+							"\t//pm.expect(response_2).to.have.property('code', 401);\r",
+							"    pm.expect(response_2).to.have.property('status', 'Unauthorized');\r",
+							"  });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateToken_WithValidUserEmptyPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':''})\r",
+							"    }\r",
+							"}, \r",
+							"    function (error_3, response_3) {\r",
+							"        pm.test('Test case : Create token with valid username/empty password : 401 Unauthorized', function() {\r",
+							"\t\t\t//pm.expect(response_3).to.have.property('code', 401);\r",
+							"\t\t\tpm.expect(response_3).to.have.property('status', 'Unauthorized');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateToken_WithValidUserPasswordAdmin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_4, response_4) {\r",
+							"        pm.test('Test case : Create token with valid username/password : 200 Created', function() {\r",
+							"\t\t\t//pm.expect(response_4).to.have.property('code', 201);\r",
+							"            pm.expect(response_4).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_4.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);               \r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshUnexpiredToken_WithEmptyUserValidPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_5, response_5) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"\t\t\t//pm.expect(response_5).to.have.property('code', 201);\r",
+							"            pm.expect(response_5).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_5.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);               \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(unexpiredToken_emptyUsername, 5000);\r",
+							"\r",
+							"function unexpiredToken_emptyUsername() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'', 'password':'admin'})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_14, response_14) {\r",
+							"            pm.test('Test case : Refresh unexpired token with empty username/valid password : 401 Unauthorized', function() {\r",
+							"                //pm.expect(response_14).to.have.property('code', 401);\r",
+							"\t\t\t\tpm.expect(response_14).to.have.property('status', 'Unauthorized');\r",
+							"        });\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshUnexpiredToken_WithValidUserEmptyPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_6, response_6) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"\t\t\t//pm.expect(response_6).to.have.property('code', 200);\r",
+							"            pm.expect(response_6).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_6.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);               \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(unexpiredToken_emptyPassword, 5000);\r",
+							"\r",
+							"function unexpiredToken_emptyPassword() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'admin', 'password':''})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_14, response_14) {\r",
+							"            pm.test('Test case : Refresh unexpired token with valid username/empty password : 401 Unauthorized', function() {\r",
+							"                //pm.expect(response_14).to.have.property('code', 401);\r",
+							"\t\t\t\tpm.expect(response_14).to.have.property('status', 'Unauthorized');\r",
+							"        });\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshUnexpiredToken_WithValidUserPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_7, response_7) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"\t\t\t//pm.expect(response_7).to.have.property('code', 200);\r",
+							"            pm.expect(response_7).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_7.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);               \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(unexpiredToken_valid, 5000);\r",
+							"\r",
+							"function unexpiredToken_valid() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_16, response_16) {\r",
+							"            pm.test('Test case : Refresh unexpired token with valid username/password : 200 OK', function() {\r",
+							"                //pm.expect(response_16).to.have.property('code', 200);\r",
+							"\t\t\t\tpm.expect(response_16).to.have.property('status', 'OK');\r",
+							"        });\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshExpiredToken_WithEmptyUserValidPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Lancer le test après 67 s\r",
+							"setTimeout(() => {}, 67000);\r",
+							"\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_8, response_8) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"\t\t\t//pm.expect(response_8).to.have.property('code', 201);\r",
+							"            pm.expect(response_8).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_8.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(expiredToken_emptyUsername, 67000);\r",
+							"\r",
+							"function expiredToken_emptyUsername() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'', 'password':'admin'})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_9, response_9) {\r",
+							"            pm.test('Test case : Refresh expired tokens with empty username/valid password : 401 Unauthorized', function() {\r",
+							"                //pm.expect(response_9).to.have.property('code', 401);\r",
+							"\t\t\t\tpm.expect(response_9).to.have.property('status', 'Unauthorized');\r",
+							"        });\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshExpiredToken_WithValidUserEmptyPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Lancer le test après 67 s\r",
+							"setTimeout(() => {}, 67000);\r",
+							"\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_10, response_10) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"\t\t\t//pm.expect(response_10).to.have.property('code', 201);\r",
+							"            pm.expect(response_10).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_10.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(expiredToken_emptyPassword, 67000);\r",
+							"\r",
+							"function expiredToken_emptyPassword() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'admin', 'password':''})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_11, response_11) {\r",
+							"            pm.test('Test case : Refresh expired tokens with valid user/empty password : 401 Unauthorized', function() {\r",
+							"                //pm.expect(response_11).to.have.property('code', 401);\r",
+							"\t\t\t\tpm.expect(response_11).to.have.property('status', 'Unauthorized');\r",
+							"        });\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshExpiredToken_WithValidUserPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Lancer le test après 67 s\r",
+							"setTimeout(() => {}, 67000);\r",
+							"\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"    }\r",
+							"    }, \r",
+							"\tfunction (error_12, response_12) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"\t\t\t//pm.expect(response_12).to.have.property('code', 201);\r",
+							"            pm.expect(response_12).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_12.json();\r",
+							"            // Save the token in a global variable\r",
+							"            pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(expiredToken_valid, 67000);\r",
+							"\r",
+							"function expiredToken_valid() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_13, response_13) {\r",
+							"            pm.test('Test case : Refresh expired tokens with valid user/password : 201 Created', function() {\r",
+							"                //pm.expect(response_13).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_13).to.have.property('status', 'Created');\r",
+							"        });\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithUnexpiredTokenAdmin_WithValidUserPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_14, response_14) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"            //pm.expect(response_14).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_14).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_14.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);   \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_NoAdmin, 5000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token\r",
+							"function createUser_NoAdmin() {\r",
+							"    console.log('recu admin ' + pm.environment.get(\"Authorization\"));\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6000', 'password':'user6000'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_15, response_15) {\r",
+							"\t\t\tpm.test('Test case : Create user with unexpired token admin : valid user/password : 201 Created', function() {\r",
+							"                //console.log(pm.globals.get('AdminTokenCreated'));\r",
+							"\t\t\t\t//pm.expect(response_15).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_15).to.have.property('status', 'Created');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithUnexpiredTokenAdmin_WithEmptyUserValidPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_16, response_16) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"            //pm.expect(response_16).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_16).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_16.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_emptyUser, 5000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token\r",
+							"function createUser_emptyUser() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'', 'password':'password'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_17, response_17) {\r",
+							"\t\t\tpm.test('Test case : Create user with unexpired token admin : Empty user/valid password : 201 Created', function() {\r",
+							"\t\t\t\t//pm.expect(response_17).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_17).to.have.property('status', 'Created');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithUnexpiredTokenAdmin_WithValidUserEmptyPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_18, response_18) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"            //pm.expect(response_18).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_18).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_18.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_emptyPassword, 5000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token\r",
+							"function createUser_emptyPassword() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6001', 'password':''})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_19, response_19) {\r",
+							"\t\t\tpm.test('Test case : Create user with unexpired token admin : valid user/empty password : 201 Created', function() {\r",
+							"\t\t\t\t//pm.expect(response_19).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_19).to.have.property('status', 'Created');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithUnexpiredTokenAdmin_WithExistingUserNewPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_20, response_20) {\r",
+							"        pm.test('Test case : Create token with user admin : 200 OK', function() {\r",
+							"            //pm.expect(response_20).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_20).to.have.property('status', 'OK');\r",
+							"            const jsonData = response_20.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_existingUser, 5000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token\r",
+							"function createUser_existingUser() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6000', 'password':'password'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_21, response_21) {\r",
+							"\t\t\tpm.test('Test case : Create user with unexpired token admin : existing user/new password : 409 Conflict', function() {\r",
+							"\t\t\t\t//pm.expect(response_21).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_21).to.have.property('status', 'Conflict');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithExpiredTokenAdmin_WithValidUserPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Relancer le test après attente 65 s\r",
+							"setTimeout(() => {}, 65000);\r",
+							"\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_22, response_22) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"            //pm.expect(response_22).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_22).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_22.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);  \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_noAdmin, 67000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token\r",
+							"function createUser_noAdmin() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6100', 'password':'user6100'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_23, response_23) {\r",
+							"\t\t\tpm.test('Test case : Create user with expired token admin : valid user/password: 401 Unauthorized', function() {\r",
+							"\t\t\t\t//pm.expect(response_23).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_23).to.have.property('status', 'Unauthorized');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithExpiredTokenAdmin_WithEmptyUserValidPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_24, response_24) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"            //pm.expect(response_24).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_24).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_24.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_emptyUser, 67000);\r",
+							"\r",
+							"// Step 2 : Create user with expired token admin :\r",
+							"function createUser_emptyUser() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'', 'password':'password'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_25, response_25) {\r",
+							"\t\t\tpm.test('Test case : Create user with expired token admin : empty user/valid password: 401 Unauthorized', function() {\r",
+							"\t\t\t\t//pm.expect(response_25).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_25).to.have.property('status', 'Unauthorized');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithExpiredTokenAdmin_WithValidUserEmptyPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_26, response_26) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"            //pm.expect(response_26).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_26).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_26.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_emptyPassword, 67000);\r",
+							"\r",
+							"// Step 2 : Create user with expired token admin :\r",
+							"function createUser_emptyPassword() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6101', 'password':''})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_27, response_27) {\r",
+							"\t\t\tpm.test('Test case : Create user with expired token admin : valid user/empty password : 401 Unauthorized', function() {\r",
+							"\t\t\t\t//pm.expect(response_27).to.have.property('code', 401);\r",
+							"\t\t\t\tpm.expect(response_27).to.have.property('status', 'Unauthorized');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithExpiredTokenAdmin_WithExistingUserNewPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_28, response_28) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"            //pm.expect(response_28).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_28).to.have.property('status', 'Created');\r",
+							"            const jsonData = response_28.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization', 'Bearer ' + jsonData.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_noAdmin, 67000);\r",
+							"\r",
+							"// Step 2 : Create user with expired token admin :\r",
+							"function createUser_noAdmin() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6100', 'password':'password'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_29, response_29) {\r",
+							"\t\t\tpm.test('Test case : Create user with expired token admin : existing user/new password : 409 Conflict', function() {\r",
+							"\t\t\t\t//pm.expect(response_29).to.have.property('code', 409);\r",
+							"\t\t\t\tpm.expect(response_29).to.have.property('status', 'Conflict');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithUnexpiredTokenNoAdmin_WithValidUserPassword_Step1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_200, response_200) {\r",
+							"        pm.test('Test case : Create token with user admin : 201 Created', function() {\r",
+							"            //pm.expect(response_22).to.have.property('code', 201);\r",
+							"\t\t\tpm.expect(response_200).to.have.property('status', 'Created');\r",
+							"            const jsonData_200 = response_200.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization_200', jsonData_200.token);  \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_noAdmin, 5000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token\r",
+							"function createUser_noAdmin() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': 'Bearer ' + pm.environment.get('Authorization_200'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6200', 'password':'user6200'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_210, response_210) {\r",
+							"\t\t\tpm.test('Test case : Create user with unexpired token admin : valid user/password : 201 Created', function() {\r",
+							"\t\t\t\t//pm.expect(response_210).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_210).to.have.property('status', 'Created');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithUnexpiredTokenNoAdmin_WithValidUserPassword_Step2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// Create token no admin with user no admin\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'user6200', 'password':'user6200'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_200, response_210) {\r",
+							"        pm.test('Test case : Create token with user no admin : 201 Created', function() {\r",
+							"            //pm.expect(response_22).to.have.property('code', 201);\r",
+							"            pm.expect(response_210).to.have.property('status', 'Created');\r",
+							"            const jsonData_210 = response_210.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization_210', jsonData_210.token);  \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"setTimeout(UserNoAdminNew, 5000);\r",
+							"//setTimeout(TokenNoAdmin, 5000);\r",
+							"function UserNoAdminNew() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': 'Bearer ' + pm.environment.get('Authorization_210'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6201', 'password':'user6201'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_230, response_230) {\r",
+							"\t\t\tpm.test('Test case : Create user with unexpired token no admin : valid user/password : 403 Forbidden', function() {\r",
+							"\t\t\t\t//pm.expect(response_230).to.have.property('code', 403);\r",
+							"\t\t\t\tpm.expect(response_230).to.have.property('status', 'Forbidden');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithExpiredTokenNoAdmin_WithValidUserPassword_Step1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Lancer le test après attente 65 s\r",
+							"setTimeout(createToken_AdminExpired(), 65000);\r",
+							"\r",
+							"// Create token with admin\r",
+							"function createToken_AdminExpired() {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'http://localhost:80/tokens',\r",
+							"        method: 'POST',\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body:{\r",
+							"            mode: 'raw',\r",
+							"            raw:JSON.stringify({'username':'admin', 'password':'admin'})\r",
+							"            }\r",
+							"        }, \r",
+							"        function (error_14, response_14) {\r",
+							"            pm.test('Test case : Create token with user admin : 200 Created', function() {\r",
+							"                //pm.expect(response_14).to.have.property('code', 201);\r",
+							"                pm.expect(response_14).to.have.property('status', 'Created');\r",
+							"                const jsonData = response_14.json();\r",
+							"                // Save the token in a global variable\r",
+							"                //pm.globals.set('AdminTokenCreated', jsonData.token);\r",
+							"                pm.environment.set('Authorization_Admin', 'Bearer ' + jsonData.token);   \r",
+							"        });\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"setTimeout(createUser_NoAdmin, 7000);\r",
+							"\r",
+							"// Step 2 : Create user no admin with the token admin\r",
+							"function createUser_NoAdmin() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization_Admin'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6300', 'password':'user6300'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_15, response_15) {\r",
+							"\t\t\tpm.test('Test case : Create user with expired token admin : valid user/password : 201 Created', function() {\r",
+							"                //console.log(pm.globals.get('AdminTokenCreated'));\r",
+							"\t\t\t\t//pm.expect(response_15).to.have.property('code', 201);\r",
+							"\t\t\t\tpm.expect(response_15).to.have.property('status', 'Created');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser_WithExpiredTokenNoAdmin_WithValidUserPassword_Step2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// Create token no admin with user no admin\r",
+							"\r",
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost:80/tokens',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body:{\r",
+							"        mode: 'raw',\r",
+							"        raw:JSON.stringify({'username':'user6300', 'password':'user6300'})\r",
+							"        }\r",
+							"    }, \r",
+							"    function (error_32, response_32) {\r",
+							"        pm.test('Test case : Create token with user no admin : 201 Created', function() {\r",
+							"            //pm.expect(response_32).to.have.property('code', 401);\r",
+							"            pm.expect(response_32).to.have.property('status', 'Created');\r",
+							"            const jsonData_noAdmin = response_32.json();\r",
+							"            // Save the token in a global variable\r",
+							"            //pm.globals.set('NonAdminTokenCreated', jsonData.token);\r",
+							"            pm.environment.set('Authorization_NoAdmin', 'Bearer ' + jsonData_noAdmin.token);                \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"setTimeout(createUser_ExpiredTokenNoAdmin, 67000);\r",
+							"\r",
+							"function createUser_ExpiredTokenNoAdmin() {\r",
+							"\tpm.sendRequest({\r",
+							"\t\turl: 'http://localhost:80/users',\r",
+							"\t\tmethod: 'POST',\r",
+							"\t\theader: {\r",
+							"            'Authorization': pm.environment.get('Authorization_NoAdmin'),\r",
+							"            'Content-Type': 'application/json'\r",
+							"        } ,\r",
+							"\t\tbody:{\r",
+							"\t\t\tmode: 'raw',\r",
+							"\t\t\traw:JSON.stringify({'username':'user6301', 'password':'user6301'})\r",
+							"\t\t\t}\r",
+							"\t\t}, \r",
+							"\t\tfunction (error_33, response_33) {\r",
+							"\t\t\tpm.test('Test case : Create user with expired token no admin : valid user/password : 401 Unauthorized', function() {\r",
+							"\t\t\t\t//pm.expect(response_33).to.have.property('code', 401);\r",
+							"\t\t\t\tpm.expect(response_33).to.have.property('status', 'Unauthorized');\r",
+							"\t\t});\r",
+							"\t});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Authorization_486",
+			"value": ""
+		},
+		{
+			"key": "Authorization_488",
+			"value": ""
+		}
+	]
+}

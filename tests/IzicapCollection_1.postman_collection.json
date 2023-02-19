@@ -40,9 +40,9 @@
 					"raw": "http://izicap:8080/tokens",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"izicap"
 					],
-					"port": "80",
+					"port": "8080",
 					"path": [
 						"tokens"
 					]

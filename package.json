@@ -6,7 +6,7 @@
     "test": "tests"
   },
   "scripts": {
-    "api-tests-production": "newman run tests/IzicapCollection_1.postman_collection.json"
+    "api-tests-production": "newman run tests/IzicapCollection_2.postman_collection.json"
   },
   "author": "Jimmy",
   "dependencies": {
